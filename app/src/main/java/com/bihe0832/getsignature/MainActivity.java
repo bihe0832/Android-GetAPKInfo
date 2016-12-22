@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         mShakeButton = (Button) findViewById(R.id.getsig_shareResultBtn);
-        mGetSigButton.setOnClickListener(new View.OnClickListener() {
+        mShakeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 shareResult();
@@ -49,19 +49,29 @@ public class MainActivity extends AppCompatActivity {
         String pkgName = mPkgNameEdit.getText().toString();
         if(null != pkgName && pkgName.length() > 0){
             try {
+
                 Signature sig = this.getPackageManager().getPackageInfo(pkgName, PackageManager.GET_SIGNATURES).signatures[0];
                 MessageDigest md5;
                 md5 = MessageDigest.getInstance("MD5");
-
-                showResult(bytesToHexString(md5.digest(sig.toByteArray())));
+                String result = bytesToHexString(md5.digest(sig.toByteArray()));
+                if(null != result && result.length() > 0){
+                    showResult("包名：" + pkgName + "\n 签名：" + result);
+                    mShakeButton.setVisibility(View.VISIBLE);
+                }else{
+                    showResult("读取失败，请重试或者检查应用是否有签名！");
+                }
             }catch (PackageManager.NameNotFoundException e){
                 e.printStackTrace();
                 showResult("应用未安装，请检查输入的包名是否正确！");
+                mShakeButton.setVisibility(View.GONE);
             }catch (NoSuchAlgorithmException e){
-
+                e.printStackTrace();
+                showResult("系统错误，请重启应用后重试！");
+                mShakeButton.setVisibility(View.GONE);
             }
         }else{
             showResult("请先在输入框输入需要查询签名应用的包名！");
+            mShakeButton.setVisibility(View.GONE);
         }
     }
 
@@ -72,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
     private void shareResult(){
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-//        sendIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_text));
+        sendIntent.putExtra(Intent.EXTRA_TEXT, mResultView.getText().toString());
         sendIntent.setType("text/plain");
-//        this.startActivity(Intent.createChooser(sendIntent, getString(R.string.share_title)));
+        this.startActivity(Intent.createChooser(sendIntent, "分享结果"));
     }
 
     private String bytesToHexString(byte md5Bytes[]) {

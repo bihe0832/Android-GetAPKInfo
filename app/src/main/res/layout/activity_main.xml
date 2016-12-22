@@ -18,6 +18,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="本工具仅限用于获取手机上安装的第三方应用的签名"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
 
         <EditText
             android:id="@+id/getsig_pkgNameEditText"
@@ -25,6 +32,7 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text=""
+            android:hint="请输入应用包名"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:ems="10"/>
@@ -32,27 +40,32 @@
         <Button
             android:id="@+id/getsig_getSigBtn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/abc_action_button_min_height_material"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="@string/app_name"
-            />
-
-        <Button
-            android:id="@+id/getsig_shareResultBtn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="分享到设备"
-            android:visibility="gone"
+            android:layout_marginBottom="30dp"
+            android:text="读取签名"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New Text"
+            android:text=""
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="30dp"
+            android:lineSpacingMultiplier="1.25"
             android:id="@+id/getsig_resultTextView" />
+
+        <Button
+            android:id="@+id/getsig_shareResultBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/abc_action_button_min_height_material"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="发送给好友"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 </RelativeLayout>
