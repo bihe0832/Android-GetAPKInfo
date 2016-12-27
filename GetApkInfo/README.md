@@ -41,7 +41,7 @@
 
 	➜  java -jar ./getPackageInfo.jar --version
 	com.bihe0832.getPackageInfo version 1.0.0 (getPackageInfo - 1)
-	homepage : https://github.com/bihe0832/AndroidSignature
+	homepage : https://github.com/bihe0832/AndroidGetAPKInfo
 	blog : http://blog.bihe0832.com
 	github : https://github.com/bihe0832
 	

@@ -11,46 +11,6 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
 **个人关于V2签名以及V2签名引起的渠道打包失败分析的介绍：[http://blog.bihe0832.com/android-v2-signature.html](http://blog.bihe0832.com/android-v2-signature.html)**
 
 
-## 使用事例
-
-#### 查看帮助
-
-	➜  java -jar CheckAndroidV2Signature.jar
-
-	usage: java -jar ./CheckAndroidV2Signature.jar [--version] [--help] [filePath]
-	
-	such as:
-	
-		 java -jar ./CheckAndroidV2Signature.jar --version
-		 java -jar ./CheckAndroidV2Signature.jar --help
-		 java -jar ./CheckAndroidV2Signature.jar ./test.apk
-	
-	after check,the result will be a string json such as:
-	
-		 {"ret":0,"msg":"ok","isV2":true,"isV2OK":true}
-	
-		 ret: result code for check
-	
-			 0 : command exec succ
-			 -1 : file not found
-			 -2 : file not an Android APK file
-			 -3 : check File signature error ,retry again
-	
-		 msg: result msg for check
-		 isV2: whether the file is use Android-V2 signature or not
-		 isV2OK: whether the file's Android-V2 signature is ok or not
-			
-			
-#### 查看版本
-
-	➜  java -jar ./CheckAndroidV2Signature.jar --version
-	com.tencent.ysdk.CheckAndroidV2Signature version 1.0.0 (CheckAndroidV2Signature - 1)
-		
-#### 查看应用信息
-
-	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
-	{"ret":0,"msg":"ok","isV2":false,"isV2OK":false}
-		
 ## 代码调整
 
 总体上是对Android的源码的移植，没有太多调整。主要调整的部分就是在`feedIntoMessageDigests `函数中计算md5的时候，为了提升效率，源码使用内存映射的方式，源码中是直接内存映射，代码迁移的时候调整为调用Java系统函数来完成内存映射。对应代码如下：
@@ -125,3 +85,48 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
                 md.update(inputBuffer);
             }
         }
+        
+## 使用事例
+
+#### 查看帮助
+
+	➜  java -jar CheckAndroidV2Signature.jar
+
+	usage: java -jar ./CheckAndroidV2Signature.jar [--version] [--help] [filePath]
+	
+	such as:
+	
+		 java -jar ./CheckAndroidV2Signature.jar --version
+		 java -jar ./CheckAndroidV2Signature.jar --help
+		 java -jar ./CheckAndroidV2Signature.jar ./test.apk
+	
+	after check,the result will be a string json such as:
+	
+		 {"ret":0,"msg":"ok","isV2":true,"isV2OK":true}
+	
+		 ret: result code for check
+	
+			 0 : command exec succ
+			 -1 : file not found
+			 -2 : file not an Android APK file
+			 -3 : check File signature error ,retry again
+	
+		 msg: result msg for check
+		 isV2: whether the file is use Android-V2 signature or not
+		 isV2OK: whether the file's Android-V2 signature is ok or not
+			
+			
+#### 查看版本
+
+	➜  java -jar ./CheckAndroidV2Signature.jar --version
+		com.tencent.ysdk.CheckAndroidV2Signature version 1.0.1 (CheckAndroidV2Signature - 2)
+		homepage : https://github.com/bihe0832/AndroidGetAPKInfo
+		blog : http://blog.bihe0832.com
+		github : https://github.com/bihe0832
+		
+#### 查看应用信息
+
+	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
+	{"ret":0,"msg":"ok","isV2":false,"isV2OK":false}
+		
+
