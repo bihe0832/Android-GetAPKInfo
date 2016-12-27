@@ -12,8 +12,8 @@ import com.bihe0832.packageinfo.v2signature.ApkSignatureSchemeV2Verifier.Signatu
 
 
 public class Main {
-	private static final int VERSION_CODE = 1;
-	private static final String VERSION_NAME = "1.0.0";
+	private static final int VERSION_CODE = 2;
+	private static final String VERSION_NAME = "1.0.1";
 	
 	//文件路径错误
 	private static final int RET_FILE_NOT_FOUND = -1;
