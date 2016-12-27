@@ -5,4 +5,6 @@ GetApkInfo/.classpath
 
 GetApkInfo/.project
 
-GetApkInfo/.settings/org.eclipse.jdt.core.prefs
+GetApkInfo/.settings
+
+CheckAndroidV2Signature/.settings
