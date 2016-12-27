@@ -36,7 +36,7 @@
 		 java -jar ./getPackageInfo.jar --help
 		 java -jar ./getPackageInfo.jar ./test.apk
 
-### 查看帮助
+### 查看版本
 
 
 	➜  java -jar ./getPackageInfo.jar --version
