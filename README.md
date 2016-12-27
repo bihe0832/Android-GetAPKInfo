@@ -2,7 +2,7 @@
 
 ## 项目简介
 
-作为基于Android平台的渠道SDK的开发者或者联调同学每天都会面对大量的apk，需要检查他们的包名、版本、应用签名等信息，尤其现在Android-V2Sginature带来的问题更多，为了提高工作效率，整理了一个获取应用基本信息的系列工具集。
+作为基于Android平台的渠道SDK的开发者或者联调同学每天都会面对大量的apk，需要检查他们的包名（packageName）、版本(versionName\versionCode)、应用签名(Signature)等信息，尤其现在Android的V2签名认证(APK Signature Scheme v2)带来的问题更多，为了提高工作效率，整理了一个获取应用基本信息的系列工具集。
 
 ## 目录结构
 
