@@ -14,7 +14,7 @@ import com.bihe0832.checksignature.ApkSignatureSchemeV2Verifier.SignatureNotFoun
  * @version 1.0.0
  *
  */
-public class CheckAndroidV2Signature {
+public class CheckAndroidSignature {
 	
 	private static final int VERSION_CODE = 1;
 	private static final String VERSION_NAME = "1.0.0";
