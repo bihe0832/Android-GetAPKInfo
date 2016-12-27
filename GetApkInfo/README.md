@@ -9,8 +9,6 @@
  
 	├── getPackageInfo-inner.jar : 混淆前的可执行jar
 	│ 
-	├── getPackageInfo.jar : 混淆后的可执行jar
-	│ 
 	├── libs  : 第三方包依赖
 	│   │
 	│   ├── AXMLPrinter2.jar : 解析AndroidMainfest
