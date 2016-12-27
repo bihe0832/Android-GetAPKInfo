@@ -16,8 +16,8 @@ import com.bihe0832.checksignature.ApkSignatureSchemeV2Verifier.SignatureNotFoun
  */
 public class CheckAndroidSignature {
 	
-	private static final int VERSION_CODE = 1;
-	private static final String VERSION_NAME = "1.0.0";
+	private static final int VERSION_CODE = 2;
+	private static final String VERSION_NAME = "1.0.1";
 	
 	//成功
 	private static final int RET_OK = 0;
@@ -71,7 +71,10 @@ public class CheckAndroidSignature {
 	}
 	
 	private static void showVersion(){
-		StringBuilder sb = new StringBuilder("com.tencent.ysdk.CheckAndroidV2Signature version " + VERSION_NAME + " (CheckAndroidV2Signature - " + VERSION_CODE + ")");
+		StringBuilder sb = new StringBuilder("com.tencent.ysdk.CheckAndroidV2Signature version " + VERSION_NAME + " (CheckAndroidV2Signature - " + VERSION_CODE + ")\n");
+		sb.append("homepage : https://github.com/bihe0832/AndroidGetAPKInfo \n");
+		sb.append("blog : http://blog.bihe0832.com \n");
+		sb.append("github : https://github.com/bihe0832 \n");
 		System.out.println(sb.toString());
 	}
 

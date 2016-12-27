@@ -54,7 +54,7 @@ public class Main {
 	
 	private static void showVersion(){
 		StringBuilder sb = new StringBuilder("com.bihe0832.getPackageInfo version " + VERSION_NAME + " (getPackageInfo - " + VERSION_CODE + ")\n");
-		sb.append("homepage : https://github.com/bihe0832/AndroidSignature \n");
+		sb.append("homepage : https://github.com/bihe0832/AndroidGetAPKInfo \n");
 		sb.append("blog : http://blog.bihe0832.com \n");
 		sb.append("github : https://github.com/bihe0832 \n");
 		System.out.println(sb.toString());
