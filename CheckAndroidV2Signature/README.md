@@ -8,8 +8,10 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
 
 **官方关于v2的详细介绍：[https://source.android.com/security/apksigning/v2.html](https://source.android.com/security/apksigning/v2.html)**
 
-### 使用事例
+**个人关于V2签名以及V2签名引起的渠道打包失败分析的介绍：[http://blog.bihe0832.com/android-v2-signature.html](http://blog.bihe0832.com/android-v2-signature.html)**
 
+
+## 使用事例
 
 #### 查看帮助
 
@@ -49,7 +51,7 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
 	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
 	{"ret":0,"msg":"ok","isV2":false,"isV2OK":false}
 		
-### 代码调整
+## 代码调整
 
 总体上是对Android的源码的移植，没有太多调整。主要调整的部分就是在`feedIntoMessageDigests `函数中计算md5的时候，为了提升效率，源码使用内存映射的方式，源码中是直接内存映射，代码迁移的时候调整为调用Java系统函数来完成内存映射。对应代码如下：
 
