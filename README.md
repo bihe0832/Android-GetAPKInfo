@@ -14,7 +14,7 @@
 	│
 	├── CheckAndroidV2Signature ：CheckAndroidV2Signature.jar的源码
 	│
-	├── getPackageInfo.jar ：一款基于Java环境的校验APK是否使用Android-V2签名，如果使用V2，V2校验是否通过的工具
+	├── getPackageInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
 	│
 	├── GetApkInfo ： getPackageInfo.jar的源码
 	│
