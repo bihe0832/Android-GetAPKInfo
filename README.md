@@ -18,6 +18,8 @@
 	│
 	├── GetApkInfo ： getPackageInfo.jar的源码
 	│
+	├── apksig ： Android SDK Build Tools中关于签名相关的工具apksigner的源码（提供了V2签名以及校验的方法）
+	│
 	└── README.md
 	
 ## 使用方法
