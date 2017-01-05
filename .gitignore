@@ -8,3 +8,7 @@ GetApkInfo/.project
 GetApkInfo/.settings
 
 CheckAndroidV2Signature/.settings
+
+apksig/.idea/
+
+apksig/local.properties

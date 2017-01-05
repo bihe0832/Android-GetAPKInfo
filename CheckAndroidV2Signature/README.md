@@ -11,6 +11,45 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
 **个人关于V2签名以及V2签名引起的渠道打包失败分析的介绍：[http://blog.bihe0832.com/android-v2-signature.html](http://blog.bihe0832.com/android-v2-signature.html)**
 
 
+### 特别说明
+
+**这几天得到官方jarsiger的开发者Alex指点，发现其实官方已经提供了相关的打包工具以及检测方法，在此一并附上，后续再补充比较详细的介绍**。
+
+#### 官方打包或者检查工具
+
+- 工具位置：Android SDK包中`build-tools/<version>/apksigner`
+- 支持版本：Android SDK Build Tools 24.0.3及以上
+- 对应源码：
+	
+	- 官方地址：[https://android.googlesource.com/platform/tools/apksig](https://android.googlesource.com/platform/tools/apksig)
+	- 个人github：项目根目录的apksig目录
+- 使用方法：
+
+		➜ $ANDROID_HOME/build-tools/24.0.3/apksigner
+		USAGE: apksigner <command> [options]
+		       apksigner --version
+		       apksigner --help
+		
+		EXAMPLE:
+		       apksigner sign --ks release.jks app.apk
+		       apksigner verify --verbose app.apk
+		
+		apksigner is a tool for signing Android APK files and for checking whether
+		signatures of APK files will verify on Android devices.
+		
+		
+		        COMMANDS
+		
+		sign                  Sign the provided APK
+		
+		verify                Check whether the provided APK is expected to verify on
+		                      Android
+		
+		version               Show this tool's version number and exit
+		
+		help                  Show this usage page and exit
+
+
 ## 代码调整
 
 总体上是对Android的源码的移植，没有太多调整。主要调整的部分就是在`feedIntoMessageDigests `函数中计算md5的时候，为了提升效率，源码使用内存映射的方式，源码中是直接内存映射，代码迁移的时候调整为调用Java系统函数来完成内存映射。对应代码如下：
