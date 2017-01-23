@@ -6,10 +6,12 @@ Android 7.0 引入一项新的应用签名方案 APK Signature Scheme v2，它�
 
 如果您使用 APK Signature Scheme v2 签署您的应用，并对应用进行了进一步更改，则应用的签名将无效。出于这个原因，请在使用 APK Signature Scheme v2 签署您的应用之前、而非之后使用 zipalign 等工具。
 
+**关于Android的APK Signature Scheme v2签名相关的资料汇总**:
+[http://blog.bihe0832.com/android-v2.html](http://blog.bihe0832.com/android-v2.html)
+
 **官方关于v2的详细介绍：[https://source.android.com/security/apksigning/v2.html](https://source.android.com/security/apksigning/v2.html)**
 
 **个人关于V2签名以及V2签名引起的渠道打包失败分析的介绍：[http://blog.bihe0832.com/android-v2-signature.html](http://blog.bihe0832.com/android-v2-signature.html)**
-
 
 ### 特别说明
 
