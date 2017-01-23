@@ -1,11 +1,21 @@
 package com.bihe0832.checksignature;
 
+import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.RandomAccessFile;
+import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Set;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import com.bihe0832.checksignature.ApkSignatureSchemeV2Verifier.SignatureNotFoundException;
-
 
 /**
  * 
@@ -78,9 +88,18 @@ public class CheckAndroidSignature {
 		System.out.println(sb.toString());
 	}
 
+	static final String SF_ATTRIBUTE_NAME_ANDROID_APK_SIGNED_NAME_STR = "X-Android-APK-Signed";
+	
 	private static void checkSig(String filePath){
+		boolean isV2 = true;
 		try {
-			boolean isV2 = ApkSignatureSchemeV2Verifier.hasSignature(filePath);
+			
+			isV2 = ApkSignatureSchemeV2Verifier.hasSignature(filePath);
+			if(!isV2){
+				int apkSignatureNum = getApkSignSchemeVersion(filePath);
+				isV2 = 2 == apkSignatureNum ? true : isV2;
+			}
+			
 			if(isV2){
 				X509Certificate[][] isV2OK = ApkSignatureSchemeV2Verifier.verify(filePath);
 				if(isV2OK.length > 0){
@@ -96,7 +115,12 @@ public class CheckAndroidSignature {
 		}catch (IOException e) {
 			showFailedCheckResult(RET_GET_SIG_BAD,"get signature failed, throw an IOException");
 		}catch (SignatureNotFoundException e) {
-			showSuccssedCheckResult(RET_OK,"the APK is not signed using APK Signature Scheme v2",true,false);
+			if(isV2){
+				showSuccssedCheckResult(RET_GET_SIG_BAD,e.toString(),true,false);
+			}else{
+				showSuccssedCheckResult(RET_OK,e.toString(),false,false);
+			}
+			
 		}catch (SecurityException e) {
 			showSuccssedCheckResult(RET_OK,"get signature failed, throw an SecurityException",true,false);
 		}
@@ -108,5 +132,35 @@ public class CheckAndroidSignature {
 	
 	private static void showFailedCheckResult(int ret,String Msg){
 		System.out.println("{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\"}"); 
+	}
+	
+	private static int getApkSignSchemeVersion(String apkFilePath) {
+	    byte[] readBuffer = new byte[8192];
+	    try {
+	        JarFile e = new JarFile(apkFilePath);
+	        Enumeration entries = e.entries();
+	        while(entries.hasMoreElements()) {
+	            JarEntry je = (JarEntry)entries.nextElement();
+	            if(!je.isDirectory() && je.getName().startsWith("META-INF/CERT.SF")) {
+	            	//FIX 临时方案：逐行读取，然后检查是不是包含两个key
+	            	InputStream jarEntryInputStream = e.getInputStream(je);  
+	                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(jarEntryInputStream));  
+	                String readLine = null;  
+	                while ((readLine = bufferedReader.readLine()) != null) {  
+	                	if(readLine.contains(SF_ATTRIBUTE_NAME_ANDROID_APK_SIGNED_NAME_STR)){
+	                		if(readLine.contains("2")){
+	                			return 2;
+	                		}else{
+	                			return 1;
+	                		}
+	                	}
+	                } 
+	            }
+	        }
+	        e.close();
+	    } catch (Exception var10) {
+	        var10.printStackTrace();
+	    }
+		return 1;
 	}
 }
