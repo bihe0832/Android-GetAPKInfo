@@ -141,7 +141,7 @@ public class CheckAndroidSignature {
 	        Enumeration entries = e.entries();
 	        while(entries.hasMoreElements()) {
 	            JarEntry je = (JarEntry)entries.nextElement();
-	            if(!je.isDirectory() && je.getName().startsWith("META-INF/CERT.SF")) {
+	            if(!je.isDirectory() && je.getName().startsWith("META-INF") && je.getName().endsWith(".SF")) {
 	            	//FIX 临时方案：逐行读取，然后检查是不是包含两个key
 	            	InputStream jarEntryInputStream = e.getInputStream(je);  
 	                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(jarEntryInputStream));  
