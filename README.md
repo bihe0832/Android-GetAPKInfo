@@ -57,3 +57,5 @@
 - [Android的APK Signature Scheme v2签名及一款基于Java环境的校验工具介绍](http://blog.bihe0832.com/android-v2-signature.html)
 
 - [如何生成混淆过的可执行的jar程序](http://blog.bihe0832.com/runnable-jar.html)
+
+- [关于Android的APK Signature Scheme v2签名相关的资料汇总](http://blog.bihe0832.com/android-v2.html)
