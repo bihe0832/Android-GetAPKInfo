@@ -4,6 +4,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.cert.X509Certificate;
 
+import org.json.JSONObject;
+
 import jdk.nashorn.api.scripting.JSObject;
 
 import com.bihe0832.checksignature.CheckAndroidSignature;
@@ -70,9 +72,13 @@ public class Main {
 			showFailedCheckResult(RET_GET_INFO_BAD,"get channel and apkinfo failed, throw an Exception");
 			return;
 		}
-		info.v2Signature = CheckAndroidSignature.checkSig(filePath);
+		String v2Signature = CheckAndroidSignature.checkSig(filePath);
 		
 		try{
+			JSONObject jsonobject = new JSONObject(v2Signature);  
+			info.isV2Signature = jsonobject.getBoolean(CheckAndroidSignature.KEY_RESULT_IS_V2);
+			info.isV2SignatureOK = jsonobject.getBoolean(CheckAndroidSignature.KEY_RESULT_IS_V2_OK);
+			info.v2CheckErrorInfo = jsonobject.getString("msg");
 			info.signature = GetSignature.getApkSignInfo(filePath);
 		}catch(Exception e){
 			showFailedCheckResult(RET_GET_INFO_BAD,"get signature failed, throw an Exception");

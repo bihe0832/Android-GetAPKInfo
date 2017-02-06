@@ -29,6 +29,8 @@ public class CheckAndroidSignature {
 	private static final int VERSION_CODE = 2;
 	private static final String VERSION_NAME = "1.0.1";
 	
+	public static final String KEY_RESULT_IS_V2 = "isV2";
+	public static final String KEY_RESULT_IS_V2_OK = "isV2OK";
 	//成功
 	private static final int RET_OK = 0;
 	//文件路径错误
@@ -127,7 +129,7 @@ public class CheckAndroidSignature {
 	}
 	
 	private static String getSuccssedCheckResult(int ret,String Msg, boolean isV2, boolean isV2Ok){
-		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\",\"isV2\":" + isV2 + ",\"isV2OK\":" + isV2Ok + "}"; 
+		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\",\""+ KEY_RESULT_IS_V2+"\":" + isV2 + ",\""+ KEY_RESULT_IS_V2_OK +"\":" + isV2Ok + "}"; 
 	}
 	
 	private static String getFailedCheckResult(int ret,String Msg){

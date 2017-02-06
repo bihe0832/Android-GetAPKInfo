@@ -7,10 +7,11 @@ GetApkInfo/.project
 
 GetApkInfo/.settings
 
+GetApkInfo/bin
+
 CheckAndroidV2Signature/.settings
 
 apksig/.idea/
 
 apksig/local.properties
 
-bin
