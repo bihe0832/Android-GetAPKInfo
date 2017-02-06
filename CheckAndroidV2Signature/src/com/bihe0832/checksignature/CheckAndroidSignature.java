@@ -48,9 +48,9 @@ public class CheckAndroidSignature {
 				}else if(para.toLowerCase().startsWith("--version")){
 					showVersion();
 				}else if(para.toLowerCase().endsWith(".apk")){
-					checkSig(para);
+					System.out.println(checkSig(para));
 				}else{
-					showFailedCheckResult(RET_FILE_NOT_GOOD, para +"is not an android apk file");
+					System.out.println(getFailedCheckResult(RET_FILE_NOT_GOOD, para +"is not an android apk file"));
 				}
 			}else{
 				showHelp();
@@ -90,7 +90,7 @@ public class CheckAndroidSignature {
 
 	static final String SF_ATTRIBUTE_NAME_ANDROID_APK_SIGNED_NAME_STR = "X-Android-APK-Signed";
 	
-	private static void checkSig(String filePath){
+	public static String checkSig(String filePath){
 		boolean isV2 = true;
 		try {
 			
@@ -103,35 +103,35 @@ public class CheckAndroidSignature {
 			if(isV2){
 				X509Certificate[][] isV2OK = ApkSignatureSchemeV2Verifier.verify(filePath);
 				if(isV2OK.length > 0){
-					showSuccssedCheckResult(RET_OK,"ok",true,true);
+					return getSuccssedCheckResult(RET_OK,"ok",true,true);
 				}else{
-					showSuccssedCheckResult(RET_OK,"ok",true,false);
+					return getSuccssedCheckResult(RET_OK,"ok",true,false);
 				}
 			}else{
-				showSuccssedCheckResult(RET_OK,"ok",false,false);
+				return getSuccssedCheckResult(RET_OK,"ok",false,false);
 			}
 		}catch (FileNotFoundException e) {
-			showFailedCheckResult(RET_FILE_NOT_FOUND,"get signature failed, File:"+ filePath +" Not Found");
+			return getFailedCheckResult(RET_FILE_NOT_FOUND,"get signature failed, File:"+ filePath +" Not Found");
 		}catch (IOException e) {
-			showFailedCheckResult(RET_GET_SIG_BAD,"get signature failed, throw an IOException");
+			return getFailedCheckResult(RET_GET_SIG_BAD,"get signature failed, throw an IOException");
 		}catch (SignatureNotFoundException e) {
 			if(isV2){
-				showSuccssedCheckResult(RET_GET_SIG_BAD,e.toString(),true,false);
+				return getSuccssedCheckResult(RET_GET_SIG_BAD,e.toString(),true,false);
 			}else{
-				showSuccssedCheckResult(RET_OK,e.toString(),false,false);
+				return getSuccssedCheckResult(RET_OK,e.toString(),false,false);
 			}
 			
 		}catch (SecurityException e) {
-			showSuccssedCheckResult(RET_OK,"get signature failed, throw an SecurityException",true,false);
+			return getSuccssedCheckResult(RET_OK,"get signature failed, throw an SecurityException",true,false);
 		}
 	}
 	
-	private static void showSuccssedCheckResult(int ret,String Msg, boolean isV2, boolean isV2Ok){
-		System.out.println("{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\",\"isV2\":" + isV2 + ",\"isV2OK\":" + isV2Ok + "}"); 
+	private static String getSuccssedCheckResult(int ret,String Msg, boolean isV2, boolean isV2Ok){
+		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\",\"isV2\":" + isV2 + ",\"isV2OK\":" + isV2Ok + "}"; 
 	}
 	
-	private static void showFailedCheckResult(int ret,String Msg){
-		System.out.println("{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\"}"); 
+	private static String getFailedCheckResult(int ret,String Msg){
+		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\"}"; 
 	}
 	
 	private static int getApkSignSchemeVersion(String apkFilePath) {

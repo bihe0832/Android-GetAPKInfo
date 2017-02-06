@@ -4,11 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.cert.X509Certificate;
 
+import jdk.nashorn.api.scripting.JSObject;
+
+import com.bihe0832.checksignature.CheckAndroidSignature;
+import com.bihe0832.checksignature.ApkSignatureSchemeV2Verifier.SignatureNotFoundException;
 import com.bihe0832.packageinfo.bean.ApkInfo;
 import com.bihe0832.packageinfo.getSignature.GetSignature;
 import com.bihe0832.packageinfo.utils.ApkUtil;
-import com.bihe0832.packageinfo.v2signature.ApkSignatureSchemeV2Verifier;
-import com.bihe0832.packageinfo.v2signature.ApkSignatureSchemeV2Verifier.SignatureNotFoundException;
 
 
 public class Main {
@@ -68,28 +70,8 @@ public class Main {
 			showFailedCheckResult(RET_GET_INFO_BAD,"get channel and apkinfo failed, throw an Exception");
 			return;
 		}
-		try {
-			boolean isV2 = ApkSignatureSchemeV2Verifier.hasSignature(filePath);
-			info.isV2Signature = isV2;
-			if(isV2){
-				X509Certificate[][] isV2OK = ApkSignatureSchemeV2Verifier.verify(filePath);
-				if(isV2OK.length > 0){
-					info.isV2SignatureOK = true;
-				}
-			}
-		}catch (FileNotFoundException e) {
-			showFailedCheckResult(RET_FILE_NOT_FOUND,"get signature failed, File:"+ filePath +" Not Found");
-			return;
-		}catch (IOException e) {
-			showFailedCheckResult(RET_GET_INFO_BAD,"get signature failed, throw an IOException");
-			return;
-		}catch (SignatureNotFoundException e) {
-			info.isV2Signature = true;
-			info.isV2SignatureOK = false;
-		}catch (SecurityException e) {
-			info.isV2Signature = true;
-			info.isV2SignatureOK = false;
-		}
+		info.v2Signature = CheckAndroidSignature.checkSig(filePath);
+		
 		try{
 			info.signature = GetSignature.getApkSignInfo(filePath);
 		}catch(Exception e){
