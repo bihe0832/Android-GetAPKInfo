@@ -16,8 +16,8 @@ import com.bihe0832.packageinfo.utils.ApkUtil;
 
 
 public class Main {
-	private static final int VERSION_CODE = 2;
-	private static final String VERSION_NAME = "1.0.1";
+	private static final int VERSION_CODE = 3;
+	private static final String VERSION_NAME = "1.0.2";
 	
 	//文件路径错误
 	private static final int RET_FILE_NOT_FOUND = -1;
@@ -78,7 +78,7 @@ public class Main {
 			JSONObject jsonobject = new JSONObject(v2Signature);  
 			info.isV2Signature = jsonobject.getBoolean(CheckAndroidSignature.KEY_RESULT_IS_V2);
 			info.isV2SignatureOK = jsonobject.getBoolean(CheckAndroidSignature.KEY_RESULT_IS_V2_OK);
-			info.v2CheckErrorInfo = jsonobject.getString("msg");
+			info.v2CheckErrorInfo = jsonobject.getString(CheckAndroidSignature.KEY_RESULT_MSG);
 			info.signature = GetSignature.getApkSignInfo(filePath);
 		}catch(Exception e){
 			showFailedCheckResult(RET_GET_INFO_BAD,"get signature failed, throw an Exception");

@@ -26,11 +26,13 @@ import com.bihe0832.checksignature.ApkSignatureSchemeV2Verifier.SignatureNotFoun
  */
 public class CheckAndroidSignature {
 	
-	private static final int VERSION_CODE = 2;
-	private static final String VERSION_NAME = "1.0.1";
+	private static final int VERSION_CODE = 3;
+	private static final String VERSION_NAME = "1.0.2";
 	
 	public static final String KEY_RESULT_IS_V2 = "isV2";
 	public static final String KEY_RESULT_IS_V2_OK = "isV2OK";
+	public static final String KEY_RESULT_RET = "ret";
+	public static final String KEY_RESULT_MSG = "msg";
 	//成功
 	private static final int RET_OK = 0;
 	//文件路径错误
@@ -129,11 +131,11 @@ public class CheckAndroidSignature {
 	}
 	
 	private static String getSuccssedCheckResult(int ret,String Msg, boolean isV2, boolean isV2Ok){
-		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\",\""+ KEY_RESULT_IS_V2+"\":" + isV2 + ",\""+ KEY_RESULT_IS_V2_OK +"\":" + isV2Ok + "}"; 
+		return "{\""+ KEY_RESULT_RET +"\":" + ret + ",\""+ KEY_RESULT_MSG +"\":\"" + Msg + "\",\""+ KEY_RESULT_IS_V2 +"\":" + isV2 + ",\""+ KEY_RESULT_IS_V2_OK +"\":" + isV2Ok + "}"; 
 	}
 	
 	private static String getFailedCheckResult(int ret,String Msg){
-		return "{\"ret\":" + ret + ",\"msg\":\"" + Msg + "\"}"; 
+		return "{\""+ KEY_RESULT_RET +"\":" + ret + ",\""+ KEY_RESULT_MSG +"\":\"" + Msg + "\"}"; 
 	}
 	
 	private static int getApkSignSchemeVersion(String apkFilePath) {
