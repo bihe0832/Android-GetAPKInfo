@@ -1,0 +1,16 @@
+usage: 
+	
+	java -jar ./getPackageInfo.jar <command> [filePath]
+	java -jar ./getPackageInfo.jar --version
+	java -jar ./getPackageInfo.jar --help
+	  
+such as:
+
+	 
+	java -jar ./getPackageInfo.jar ./test.apk
+	java -jar ./getPackageInfo.jar --version
+	java -jar ./getPackageInfo.jar --help
+	
+after check,the result will be a string json such as:
+
+	 

@@ -1,0 +1,3 @@
+homepage : https://github.com/bihe0832/AndroidGetAPKInfo
+blog : http://blog.bihe0832.com
+github : https://github.com/bihe0832

@@ -12,6 +12,9 @@
 	│
 	├── CheckAndroidV2Signature.jar ：一款基于Java环境的校验APK是否使用Android-V2签名，如果使用V2，V2校验是否通过的工具
 	│
+	├── CheckAndroidV2SignatureByAPKSig ：CheckAndroidV2SignatureByAPKSig.jar的源码	│
+	├── CheckAndroidV2SignatureByAPKSig.jar ：基于官方签名相关的工具apksigner的源码改造的安卓签名校验工具
+	│
 	├── CheckAndroidV2Signature ：CheckAndroidV2Signature.jar的源码
 	│
 	├── getPackageInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
@@ -35,19 +38,26 @@
 	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
 	{"ret":0,"msg":"ok","isV2":false,"isV2OK":false}
 
+### CheckAndroidV2Signature.jar
+
+	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
+	{"ret":0,"msg":"","isV1OK":true,"isV2":false,"isV2OK":false,"keystoreMd5":"252e3ded833125ed3e3bb010bc24f4dc"}
+	
 ### getPackageInfo.jar
 
 	➜  java -jar ./getPackageInfo.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
 	
 	执行结果: 成功
 	应用信息:
-	  包名: com.tencent.tmgp.yybtestsdk
-	  版本名: 1.3.1
-	  版本号: 1
-	  渠道号: null
-	  签名: 252e3ded833125ed3e3bb010bc24f4dc
+	  包名: com.huohoubrowser
+	  版本名: 4.0.1.8
+	  版本号: 4018
+	  签名文件MD5: f430582429f49b685c3572ba28995e39
+	  V1签名验证通过: false
 	  使用V2签名: false
-	  V2签名验证通过: false	
+	  V2签名验证通过: false
+	  签名验证失败原因: ERROR: JAR signer CERT.RSA: JAR signature META-INF/CERT.SF indicates the APK is signed using APK Signature Scheme v2 but no such signature was found. Signature stripped?
+
 ## 相关文章
 
 以下文章为个人博客中关于上述内容的对应介绍，除部分原理或者背景相关的内容外，大部分内容与github中README一致。
