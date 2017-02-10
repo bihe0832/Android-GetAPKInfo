@@ -12,7 +12,8 @@
 	│
 	├── CheckAndroidV2Signature.jar ：一款基于Java环境的校验APK是否使用Android-V2签名，如果使用V2，V2校验是否通过的工具
 	│
-	├── CheckAndroidV2SignatureByAPKSig ：CheckAndroidV2SignatureByAPKSig.jar的源码	│
+	├── CheckAndroidV2SignatureByAPKSig ：CheckAndroidV2SignatureByAPKSig.jar的源码
+	│
 	├── CheckAndroidV2SignatureByAPKSig.jar ：基于官方签名相关的工具apksigner的源码改造的安卓签名校验工具
 	│
 	├── CheckAndroidV2Signature ：CheckAndroidV2Signature.jar的源码
