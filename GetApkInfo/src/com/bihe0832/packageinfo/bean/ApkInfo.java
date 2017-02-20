@@ -6,6 +6,7 @@ public class ApkInfo {
 	public String versionName = "";
 	public String packageName = "";
 	public String signature = "";
+	public String channel = "";
 	public boolean isV1SignatureOK = false;
 	public boolean isV2Signature = false;
 	public boolean isV2SignatureOK = false;
@@ -18,6 +19,7 @@ public class ApkInfo {
 		sb.append("  版本名: " + versionName + "\n");
 		sb.append("  版本号: " + versionCode + "\n");
 		sb.append("  签名文件MD5: " + signature + "\n");
+		sb.append("  渠道号: " + channel + "\n");
 		sb.append("  V1签名验证通过: " + isV1SignatureOK + "\n");
 		sb.append("  使用V2签名: " + isV2Signature + "\n");
 		sb.append("  V2签名验证通过: " + isV2SignatureOK + "\n");

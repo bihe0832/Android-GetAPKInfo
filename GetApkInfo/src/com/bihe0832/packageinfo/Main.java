@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+
 import org.json.JSONObject;
 
 import com.android.apksigner.ApkSignerTool;
 import com.bihe0832.packageinfo.bean.ApkInfo;
 import com.bihe0832.packageinfo.getSignature.GetSignature;
 import com.bihe0832.packageinfo.utils.ApkUtil;
+import com.tencent.ysdk.apkchannel.ApkChannelTool;
 
 
 public class Main {
@@ -54,6 +56,7 @@ public class Main {
 		String v2Signature = ApkSignerTool.verify(filePath);
 		
 		try{
+			info.channel = ApkChannelTool.readChannel(filePath);
 			JSONObject jsonobject = new JSONObject(v2Signature);  
 			info.isV1SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V1_OK);
 			info.isV2Signature = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2);
