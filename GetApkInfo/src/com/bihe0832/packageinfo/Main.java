@@ -11,13 +11,12 @@ import com.android.apksigner.ApkSignerTool;
 import com.bihe0832.packageinfo.bean.ApkInfo;
 import com.bihe0832.packageinfo.getSignature.GetSignature;
 import com.bihe0832.packageinfo.utils.ApkUtil;
-import com.tencent.ysdk.apkchannel.ApkChannelTool;
 
 
 public class Main {
 
-	private static final int VERSION_CODE = 4;
-	private static final String VERSION_NAME = "1.1.0";
+	private static final int VERSION_CODE = 5;
+	private static final String VERSION_NAME = "1.1.1";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
 
@@ -32,7 +31,7 @@ public class Main {
             printUsage(HELP_PAGE_GENERAL);
             return;
         } else if (params[0].toLowerCase().startsWith("--version")) {
-    		System.out.println("com.tencent.ysdk.CheckAndroidV2Signature version " + VERSION_NAME + " (CheckAndroidV2Signature - " + VERSION_CODE + ")\n");
+    		System.out.println(Main.class.toString() + " version " + VERSION_NAME + " (CheckAndroidV2Signature - " + VERSION_CODE + ")\n");
     		printUsage(VERSION_PAGE_GENERAL);
             return;
         } else if(params[0].toLowerCase().endsWith(".apk")){
@@ -56,7 +55,6 @@ public class Main {
 		String v2Signature = ApkSignerTool.verify(filePath);
 		
 		try{
-			info.channel = ApkChannelTool.readChannel(filePath);
 			JSONObject jsonobject = new JSONObject(v2Signature);  
 			info.isV1SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V1_OK);
 			info.isV2Signature = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2);
@@ -85,7 +83,7 @@ public class Main {
         try (BufferedReader in =
                 new BufferedReader(
                         new InputStreamReader(
-                                ApkSignerTool.class.getResourceAsStream(page),
+                                Main.class.getResourceAsStream(page),
                                 StandardCharsets.UTF_8))) {
             String line;
             while ((line = in.readLine()) != null) {
