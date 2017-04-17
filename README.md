@@ -61,8 +61,6 @@
 
 ## 相关文章
 
-以下文章为个人博客中关于上述内容的对应介绍，除部分原理或者背景相关的内容外，大部分内容与github中README一致。
-
 - [一款基于Java环境的读取应用包名、签名、是否V2签名等基本信息的工具](http://blog.bihe0832.com/java-getpackageinfo.html)
 
 - [关于Android的APK Signature Scheme v2签名相关的资料汇总](http://blog.bihe0832.com/android-v2.html)
