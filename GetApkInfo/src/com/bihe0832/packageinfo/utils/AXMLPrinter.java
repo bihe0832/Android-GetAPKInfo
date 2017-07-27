@@ -1,142 +1,191 @@
-// Decompiled by Jad v1.5.8e2. Copyright 2001 Pavel Kouznetsov.
-// Jad home page: http://kpdus.tripod.com/jad.html
-// Decompiler options: packimports(3) fieldsfirst ansi space 
-// Source File Name:   AXMLPrinter.java
-
+/*
+ * Copyright 2008 Android4ME
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *	 http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.bihe0832.packageinfo.utils;
 
-import java.io.InputStream;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringReader;
+import java.io.StringWriter;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+
+import org.xmlpull.v1.XmlPullParser;
 
 import android.content.res.AXmlResourceParser;
+import android.util.TypedValue;
 
+/**
+ * This is example usage of AXMLParser class.
+ * 
+ * Prints xml document from Android's binary xml file.
+ */
 public class AXMLPrinter {
-
-	private static final float RADIX_MULTS[] = { 0.0039063F, 3.051758E-005F, 1.192093E-007F, 4.656613E-010F };
-	private static final String DIMENSION_UNITS[] = { "px", "dip", "sp", "pt", "in", "mm", "", "" };
-	private static final String FRACTION_UNITS[] = { "%", "%p", "", "", "", "", "", "" };
-	private StringBuffer buf;
-
-	public AXMLPrinter() {
-		buf = new StringBuffer();
-	}
-
-	public StringBuffer getBuf() {
-		return buf;
-	}
-
-	public void setBuf(StringBuffer buf) {
-		this.buf = buf;
-	}
-
-	public void startPrinf(InputStream stream) {
+	private static final String DEFAULT_XML = "AndroidManifest.xml";
+	
+	
+	public static String getManifestXMLFromAPK(String apkPath) {
+		ZipFile file = null;
+		StringBuilder xmlSb = new StringBuilder(100);
 		try {
-			AXmlResourceParser parser = new AXmlResourceParser();
-			parser.open(stream);
-			StringBuilder indent = new StringBuilder(10);
-			do {
-				int type = parser.next();
-				if (type == 1)
-					break;
+			File apkFile = new File(apkPath);
+			file = new ZipFile(apkFile, ZipFile.OPEN_READ);
+			ZipEntry entry = file.getEntry(DEFAULT_XML);
+			
+			AXmlResourceParser parser=new AXmlResourceParser();
+			parser.open(file.getInputStream(entry));
+			
+			StringBuilder sb=new StringBuilder(10);
+			final String indentStep="	";
+			
+			int type;
+			while ((type=parser.next()) != XmlPullParser.END_DOCUMENT) {
 				switch (type) {
-				case 0: // '\0'
-					log("<?xml version=\"1.0\" encoding=\"utf-8\"?>",
-							new Object[0]);
-					break;
-
-				case 2: // '\002'
-					log("%s<%s%s", new Object[] { indent,
-							getNamespacePrefix(parser.getPrefix()),
-							parser.getName() });
-					indent.append("\t");
-					int namespaceCountBefore = parser.getNamespaceCount(parser
-							.getDepth() - 1);
-					int namespaceCount = parser.getNamespaceCount(parser
-							.getDepth());
-					for (int i = namespaceCountBefore; i != namespaceCount; i++)
-						log("%sxmlns:%s=\"%s\"", new Object[] { indent,
+					case XmlPullParser.START_DOCUMENT:
+					{
+						log(xmlSb,"<?xml version=\"1.0\" encoding=\"utf-8\"?>");
+						break;
+					}
+					case XmlPullParser.START_TAG:
+					{
+						log(false,xmlSb,"%s<%s%s",sb,
+							getNamespacePrefix(parser.getPrefix()),parser.getName());
+						sb.append(indentStep);
+						
+						int namespaceCountBefore=parser.getNamespaceCount(parser.getDepth()-1);
+						int namespaceCount=parser.getNamespaceCount(parser.getDepth());
+						
+						for (int i=namespaceCountBefore;i!=namespaceCount;++i) {
+							log(xmlSb,"%sxmlns:%s=\"%s\"",
+								i==namespaceCountBefore?"  ":sb,
 								parser.getNamespacePrefix(i),
-								parser.getNamespaceUri(i) });
-
-					for (int i = 0; i != parser.getAttributeCount(); i++)
-						log("%s%s%s=\"%s\"",
-								new Object[] {
-										indent,
-										getNamespacePrefix(parser
-												.getAttributePrefix(i)),
-										parser.getAttributeName(i),
-										getAttributeValue(parser, i) });
-
-					log("%s>", new Object[] { indent });
-					break;
-
-				case 3: // '\003'
-					indent.setLength(indent.length() - "\t".length());
-					log("%s</%s%s>", new Object[] { indent,
+								parser.getNamespaceUri(i));
+						}
+						
+						for (int i=0,size=parser.getAttributeCount();i!=size;++i) {
+							log(false,xmlSb, "%s%s%s=\"%s\""," ",
+								getNamespacePrefix(parser.getAttributePrefix(i)),
+								parser.getAttributeName(i),
+								getAttributeValue(parser,i));
+						}
+//						log("%s>",sb);
+						log(xmlSb,">");
+						break;
+					}
+					case XmlPullParser.END_TAG:
+					{
+						sb.setLength(sb.length()-indentStep.length());
+						log(xmlSb,"%s</%s%s>",sb,
 							getNamespacePrefix(parser.getPrefix()),
-							parser.getName() });
-					break;
-
-				case 4: // '\004'
-					log("%s%s", new Object[] { indent, parser.getText() });
-					break;
+							parser.getName());
+						break;
+					}
+					case XmlPullParser.TEXT:
+					{
+						log(xmlSb,"%s%s",sb,parser.getText());
+						break;
+					}
 				}
-			} while (true);
-		} catch (Exception e) {
+			}
+			parser.close();
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
+//		System.out.println(xmlSb.toString());
+		return xmlSb.toString();
 	}
-
+	
 	private static String getNamespacePrefix(String prefix) {
-		if (prefix == null || prefix.length() == 0)
+		if (prefix==null || prefix.length()==0) {
 			return "";
-		else
-			return (new StringBuilder(String.valueOf(prefix))).append(":").toString();
+		}
+		return prefix+":";
 	}
-
-	private static String getAttributeValue(AXmlResourceParser parser, int index) {
-		int type = parser.getAttributeValueType(index);
-		int data = parser.getAttributeValueData(index);
-		if (type == 3)
+	
+	private static String getAttributeValue(AXmlResourceParser parser,int index) {
+		int type=parser.getAttributeValueType(index);
+		int data=parser.getAttributeValueData(index);
+		if (type==TypedValue.TYPE_STRING) {
 			return parser.getAttributeValue(index);
-		if (type == 2)
-			return String.format("?%s%08X", new Object[] { getPackage(data), Integer.valueOf(data) });
-		if (type == 1)
-			return String.format("@%s%08X", new Object[] { getPackage(data), Integer.valueOf(data) });
-		if (type == 4)
+		}
+		if (type==TypedValue.TYPE_ATTRIBUTE) {
+			return String.format("?%s%08X",getPackage(data),data);
+		}
+		if (type==TypedValue.TYPE_REFERENCE) {
+			return String.format("@%s%08X",getPackage(data),data);
+		}
+		if (type==TypedValue.TYPE_FLOAT) {
 			return String.valueOf(Float.intBitsToFloat(data));
-		if (type == 17)
-			return String.format("0x%08X", new Object[] { Integer.valueOf(data) });
-		if (type == 18)
-			return data == 0 ? "false" : "true";
-		if (type == 5)
-			return (new StringBuilder(String.valueOf(Float.toString(complexToFloat(data))))).append(DIMENSION_UNITS[data & 0xf]).toString();
-		if (type == 6)
-			return (new StringBuilder(String.valueOf(Float.toString(complexToFloat(data))))).append(FRACTION_UNITS[data & 0xf]).toString();
-		if (type >= 28 && type <= 31)
-			return String.format("#%08X", new Object[] { Integer.valueOf(data) });
-		if (type >= 16 && type <= 31)
+		}
+		if (type==TypedValue.TYPE_INT_HEX) {
+			return String.format("0x%08X",data);
+		}
+		if (type==TypedValue.TYPE_INT_BOOLEAN) {
+			return data!=0?"true":"false";
+		}
+		if (type==TypedValue.TYPE_DIMENSION) {
+			return Float.toString(complexToFloat(data))+
+				DIMENSION_UNITS[data & TypedValue.COMPLEX_UNIT_MASK];
+		}
+		if (type==TypedValue.TYPE_FRACTION) {
+			return Float.toString(complexToFloat(data))+
+				FRACTION_UNITS[data & TypedValue.COMPLEX_UNIT_MASK];
+		}
+		if (type>=TypedValue.TYPE_FIRST_COLOR_INT && type<=TypedValue.TYPE_LAST_COLOR_INT) {
+			return String.format("#%08X",data);
+		}
+		if (type>=TypedValue.TYPE_FIRST_INT && type<=TypedValue.TYPE_LAST_INT) {
 			return String.valueOf(data);
-		else
-			return String
-					.format("<0x%X, type 0x%02X>",
-							new Object[] { Integer.valueOf(data),
-									Integer.valueOf(type) });
+		}
+		return String.format("<0x%X, type 0x%02X>",data,type);
 	}
-
+	
 	private static String getPackage(int id) {
-		if (id >>> 24 == 1)
+		if (id>>>24==1) {
 			return "android:";
-		else
-			return "";
+		}
+		return "";
 	}
 
-	private void log(String format, Object arguments[]) {
-		buf.append(String.format(format, arguments));
-		buf.append("\n");
+	private static void log(StringBuilder xmlSb,String format,Object...arguments) {
+		log(true,xmlSb, format, arguments);
 	}
-
+	
+	private static void log(boolean newLine,StringBuilder xmlSb,String format,Object...arguments) {
+//		System.out.printf(format,arguments);
+//		if(newLine) System.out.println();
+		xmlSb.append(String.format(format, arguments));
+		if(newLine) xmlSb.append("\n");
+	}
+	
+	
+	
+	/////////////////////////////////// ILLEGAL STUFF, DONT LOOK :)
+	
 	public static float complexToFloat(int complex) {
-		return (float) (complex & 0xffffff00) * RADIX_MULTS[complex >> 4 & 3];
+		return (float)(complex & 0xFFFFFF00)*RADIX_MULTS[(complex>>4) & 3];
 	}
-
+	
+	private static final float RADIX_MULTS[]={
+		0.00390625F,3.051758E-005F,1.192093E-007F,4.656613E-010F
+	};
+	private static final String DIMENSION_UNITS[]={
+		"px","dip","sp","pt","in","mm","",""
+	};
+	private static final String FRACTION_UNITS[]={
+		"%","%p","","","","","",""
+	};
 }

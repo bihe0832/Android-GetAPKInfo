@@ -20,11 +20,15 @@
 	│
 	├── getPackageInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
 	│
+	├── getMorePackageInfo.jar ：getPackageInfo.jar的升级版，增加了权限、SDK版本的获取
+	│
 	├── GetApkInfo ： getPackageInfo.jar的源码
 	│
 	├── apksig ： Android SDK Build Tools中关于签名相关的工具apksigner的源码（提供了V2签名以及校验的方法）
 	│
 	└── README.md
+	
+**备注：除了根目录，每个子项目下面都有对应功能介绍相关的ReadMe文件，如果想了解具体项目的详细信息，可以进入子项目查看**
 	
 ## 使用方法
 
@@ -59,6 +63,31 @@
 	  V2签名验证通过: false
 	  签名验证失败原因: ERROR: JAR signer CERT.RSA: JAR signature META-INF/CERT.SF indicates the APK is signed using APK Signature Scheme v2 but no such signature was found. Signature stripped?
 
+### getMorePackageInfo.jar
+
+➜  java -jar ./getMorePackageInfo.jar ./test.apk
+	  
+	执行结果: 成功
+	应用信息:
+	  包名: com.tencent.jygame
+	  版本名: 0.0.1.30
+	  版本号: 287
+	  签名文件MD5: 634b6933d798de3498f20a9b02452575
+	  SDK版本:
+	      minSdkVersion:12
+	      targetSdkVersion:25
+	  V1签名验证通过: true
+	  使用V2签名: true
+	  V2签名验证通过: true
+	  使用权限列表:
+	      android.permission.INTERNET
+	      android.permission.VIBRATE
+	      android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+	      android.permission.WRITE_EXTERNAL_STORAGE
+	      android.permission.ACCESS_NETWORK_STATE
+	      android.permission.ACCESS_WIFI_STATE
+	      android.permission.READ_PHONE_STATE
+	      
 ## 相关文章
 
 - [一款基于Java环境的读取应用包名、签名、是否V2签名等基本信息的工具](http://blog.bihe0832.com/java-getpackageinfo.html)

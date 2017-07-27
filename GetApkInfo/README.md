@@ -20,6 +20,8 @@
 	└── src : 源码
 
 
+根据 [https://github.com/bihe0832/Android-GetAPKInfo/issues/2](https://github.com/bihe0832/Android-GetAPKInfo/issues/2) 的需求，增加了获取更多信息的jar：getMorePackageInfo.jar；可以直接在根目录下载。由于个人实际开发中并不需要其余信息，因此在代码中**新增字段在打印时被注释了**。如果有相关的需求，可以删除com.bihe0832.packageinfo.bean.ApkInfo的toString中相关的注释。如果有更多字段的添加需求，可以参照com.bihe0832.packageinfo.utils.ApkUtil中的代码实现添加。
+
 ## 使用事例
 
 ### 查看帮助
@@ -57,3 +59,27 @@
 	  签名: 252e3ded833125ed3e3bb010bc24f4dc
 	  使用V2签名: false
 	  V2签名验证通过: false	
+	  
+	  
+	  ➜  java -jar ./getMorePackageInfo.jar ./test.apk
+	  
+	执行结果: 成功
+	应用信息:
+	  包名: com.tencent.jygame
+	  版本名: 0.0.1.30
+	  版本号: 287
+	  签名文件MD5: 634b6933d798de3498f20a9b02452575
+	  SDK版本:
+	      minSdkVersion:12
+	      targetSdkVersion:25
+	  V1签名验证通过: true
+	  使用V2签名: true
+	  V2签名验证通过: true
+	  使用权限列表:
+	      android.permission.INTERNET
+	      android.permission.VIBRATE
+	      android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+	      android.permission.WRITE_EXTERNAL_STORAGE
+	      android.permission.ACCESS_NETWORK_STATE
+	      android.permission.ACCESS_WIFI_STATE
+	      android.permission.READ_PHONE_STATE

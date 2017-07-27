@@ -16,7 +16,7 @@ import com.bihe0832.packageinfo.utils.ApkUtil;
 public class Main {
 
 	private static final int VERSION_CODE = 5;
-	private static final String VERSION_NAME = "1.1.1";
+	private static final String VERSION_NAME = "1.1.2";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
 

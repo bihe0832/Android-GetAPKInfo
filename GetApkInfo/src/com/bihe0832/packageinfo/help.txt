@@ -11,6 +11,37 @@ such as:
 	java -jar ./getPackageInfo.jar --version
 	java -jar ./getPackageInfo.jar --help
 	
-after check,the result will be a string json such as:
+after check,the result will be as flow:
 
-	 
+	执行结果: 成功
+	应用信息: 
+	  包名: com.tencent.jygame
+	  版本名: 0.0.1.8
+	  版本号: 294
+	  签名文件MD5: 634b6933d798de3498f20a9b02452575
+	  V1签名验证通过: true
+	  使用V2签名: true
+	  V2签名验证通过: true
+	  
+if use getMorePackageInfo.jar，the result will be as flow:
+	
+	执行结果: 成功
+	应用信息: 
+	  包名: com.tencent.jygame
+	  版本名: 0.0.1.8
+	  版本号: 294
+	  签名文件MD5: 634b6933d798de3498f20a9b02452575
+	  SDK版本:
+	      minSdkVersion:12
+	      targetSdkVersion:25
+	  V1签名验证通过: true
+	  使用V2签名: true
+	  V2签名验证通过: true
+	  使用权限列表:
+	      android.permission.INTERNET
+	      android.permission.VIBRATE
+	      android.permission.MOUNT_UNMOUNT_FILESYSTEMS
+	      android.permission.WRITE_EXTERNAL_STORAGE
+	      android.permission.ACCESS_NETWORK_STATE
+	      android.permission.ACCESS_WIFI_STATE
+	      android.permission.READ_PHONE_STATE

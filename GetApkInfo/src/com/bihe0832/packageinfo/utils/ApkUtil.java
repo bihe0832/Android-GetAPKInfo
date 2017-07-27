@@ -1,10 +1,9 @@
 package com.bihe0832.packageinfo.utils;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.nio.charset.StandardCharsets;
+
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -12,6 +11,10 @@ import org.jdom.Namespace;
 import org.jdom.input.SAXBuilder;
 
 import com.bihe0832.packageinfo.bean.ApkInfo;
+
+import java.util.Iterator;
+import java.util.List;
+
 
 public class ApkUtil {
 	
@@ -21,7 +24,8 @@ public class ApkUtil {
 		SAXBuilder builder = new SAXBuilder();
 		Document document = null;
 		try{
-			document = builder.build(getXmlInputStream(apkPath));
+			InputStream stream = new ByteArrayInputStream(AXMLPrinter.getManifestXMLFromAPK(apkPath).getBytes(StandardCharsets.UTF_8));
+			document = builder.build(stream);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -35,29 +39,17 @@ public class ApkUtil {
 				info.packageName = a.substring(a.indexOf("package=\"")+9, a.lastIndexOf("\""));
 			}
 		}
-	}
-
-	private static InputStream getXmlInputStream(String apkPath) {
-		InputStream inputStream = null;
-		InputStream xmlInputStream = null;
-		ZipFile zipFile = null;
-		try {
-			zipFile = new ZipFile(apkPath);
-			ZipEntry zipEntry = new ZipEntry("AndroidManifest.xml");
-			inputStream = zipFile.getInputStream(zipEntry);
-			AXMLPrinter xmlPrinter = new AXMLPrinter();
-			xmlPrinter.startPrinf(inputStream);
-			xmlInputStream = new ByteArrayInputStream(xmlPrinter.getBuf().toString().getBytes("UTF-8"));
-		} catch (IOException e) {
-			e.printStackTrace();
-			try {
-				inputStream.close();
-				zipFile.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+		
+		List booklist=root.getChildren("uses-sdk");
+		Element book = (Element) booklist.get(0);
+		info.minSdkVersion = book.getAttributeValue("minSdkVersion", NS);
+		info.targetSdkVersion = book.getAttributeValue("targetSdkVersion", NS);
+		
+		booklist=root.getChildren("uses-permission");
+		for (Iterator iter = booklist.iterator(); iter.hasNext();) {
+			Element tempBook = (Element) iter.next();
+			info.permissions.add(tempBook.getAttributeValue("name", NS));
 		}
-		return xmlInputStream;
 	}
 
 }
