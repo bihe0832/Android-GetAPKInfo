@@ -1,0 +1,1 @@
+include ':AndroidGetSignature', ':CheckAndroidV2Signature', ':CheckAndroidV2SignatureByAPKSig', ':GetApkInfo'
