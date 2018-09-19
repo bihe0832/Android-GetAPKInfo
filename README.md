@@ -13,7 +13,9 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	│
 	├── AndroidGetSignature : AndroidGetSignature.apk对应源码
 	│
-	├── CheckAndroidV2Signature.jar ：一款基于Java环境的校验APK是否使用Android-V2签名，如果使用V2，V2校验是否通过的工具
+	├── AXMLPrinter2_zixie.jar ：对于官方工具AXMLPrinter2的优化，解决因为不同api下apk的AndroidMainfest编码引起的问题
+	│
+	├── AXMLPrinter2_zixie ：AXMLPrinter2_zixie.jar的源码
 	│
 	├── CheckAndroidV2SignatureByAPKSig ：CheckAndroidV2SignatureByAPKSig.jar的源码
 	│
@@ -40,6 +42,10 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 ### AndroidGetSignature.apk 
 
 安装AndroidGetSignature.apk 后输入包名，点击获取
+
+### AXMLPrinter2_zixie.jar 
+
+非可执行jar，主要是对官方工具AXMLPrinter2针对不同api下AndroidMainfest编码不同导致解析异常的优化，解决[https://github.com/bihe0832/Android-GetAPKInfo/issues/1](https://github.com/bihe0832/Android-GetAPKInfo/issues/1) 和 [https://github.com/bihe0832/Android-GetAPKInfo/issues/5](https://github.com/bihe0832/Android-GetAPKInfo/issues/5)遇到的问题
 
 ### CheckAndroidV2Signature.jar
 
