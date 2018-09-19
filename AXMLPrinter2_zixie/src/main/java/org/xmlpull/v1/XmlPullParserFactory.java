@@ -16,7 +16,7 @@ import java.util.Vector;
  * and its class used for loading (no class loader - on J2ME no access to context class loaders)
  * must be passed explicitly. If no name of parser factory was passed (or is null)
  * it will try to find name by searching in CLASSPATH for
- * META-INF/services/org.xmlpull.v1.XmlPullParserFactory resource that should contain
+ * META-INF/services/XmlPullParserFactory resource that should contain
  * a comma separated list of class names of factories or parsers to try (in order from
  * left to the right). If none found, it will throw an exception.
  *
@@ -44,11 +44,11 @@ public class XmlPullParserFactory {
     /** Name of the system or midlet property that should be used for
      a system property containing a comma separated list of factory
      or parser class names (value:
-     org.xmlpull.v1.XmlPullParserFactory). */
+     XmlPullParserFactory). */
 
 
     public static final String PROPERTY_NAME =
-        "org.xmlpull.v1.XmlPullParserFactory";
+        "XmlPullParserFactory";
 
     private static final String RESOURCE_NAME =
         "/META-INF/services/" + PROPERTY_NAME;

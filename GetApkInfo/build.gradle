@@ -31,6 +31,7 @@ sourceSets.main.resources {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':CheckAndroidV2SignatureByAPKSig')
+    compile project(':AXMLPrinter2_zixie')
 }
 
 //导出未混淆Jar

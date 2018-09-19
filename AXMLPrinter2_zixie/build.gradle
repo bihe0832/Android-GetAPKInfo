@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+//导出未混淆Jar
+task copyJar(dependsOn: "build") {
+    copy {
+        from 'build/libs/'+ jar.baseName +'-'+ jar.version +'.jar'
+        into './../'
+        rename { String fileName ->
+            fileName.replace(jar.baseName +'-'+ jar.version +'.jar', jar.baseName  +'.jar')
+        }
+    }
+}
+
+
+//导出混淆后的Jar
+task proguardJar(type: proguard.gradle.ProGuardTask,dependsOn: "build") {
+    // 未混淆的jar路径
+    injars 'build/libs/' + jar.baseName + '-' + jar.version + '.jar'
+    // 混淆后的jar输出路径
+    outjars './../' + jar.baseName + '.jar'
+    // 混淆协议
+    configuration './../proguard-rules.pro'
+}

@@ -16,9 +16,6 @@
 package com.bihe0832.packageinfo.utils;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 

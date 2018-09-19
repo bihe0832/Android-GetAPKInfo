@@ -6,12 +6,12 @@
 *.iml
 .gradle
 .idea
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
+local.properties
+.idea/*
 .DS_Store
-/build
-/captures
+build
+captures
 .externalNativeBuild
 GetApkInfo/build
 AndroidGetSignature/build
+AXMLPrinter2_zixie/build

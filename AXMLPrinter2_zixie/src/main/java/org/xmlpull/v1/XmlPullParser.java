@@ -73,7 +73,7 @@ import java.io.Reader;
  * import java.io.IOException;
  * import java.io.StringReader;
  *
- * import org.xmlpull.v1.XmlPullParser;
+ * import XmlPullParser;
  * import org.xmlpull.v1.<a href="XmlPullParserException.html">XmlPullParserException.html</a>;
  * import org.xmlpull.v1.<a href="XmlPullParserFactory.html">XmlPullParserFactory</a>;
  *
