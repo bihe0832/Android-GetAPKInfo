@@ -33,8 +33,8 @@ import com.android.apksig.ApkVerifier;
  */
 public class ApkSignerTool {
 
-    private static final int VERSION_CODE = 4;
-	private static final String VERSION_NAME = "1.1.0";
+    private static final int VERSION_CODE = 5;
+	private static final String VERSION_NAME = "1.1.1";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
 	
@@ -51,12 +51,18 @@ public class ApkSignerTool {
 	private static final int RET_FILE_NOT_GOOD = -2;
 	//获取签名异常
 	private static final int RET_GET_SIG_BAD = -3;
-	
+	private static boolean sShowDebug = false;
+
     public static void main(String[] params) throws Exception {
         if ((params.length == 0)) {
             printUsage(HELP_PAGE_GENERAL);
             return;
         }
+
+		if (params[params.length - 1].toLowerCase().startsWith("--debug")) {
+			sShowDebug = true;
+		}
+
         if (params[0].toLowerCase().startsWith("--help")) {
             printUsage(HELP_PAGE_GENERAL);
             return;
@@ -65,7 +71,7 @@ public class ApkSignerTool {
     		printUsage(VERSION_PAGE_GENERAL);
             return;
         } else if(params[0].toLowerCase().endsWith(".apk")){
-        	System.out.println(verify(params[0]));
+        	System.out.println(verify(params[0],sShowDebug));
             return;
         }else{
 			System.out.println(getFailedCheckResult(RET_FILE_NOT_GOOD, params[0] +"is not an android apk file"));
@@ -90,7 +96,7 @@ public class ApkSignerTool {
 		return "{\""+ KEY_RESULT_RET +"\":" + ret + ",\""+ KEY_RESULT_MSG +"\":\"" + Msg + "\"}"; 
 	}
 	
-    public static String verify(String apkPath){
+    public static String verify(String apkPath, boolean showException){
         File inputApk = new File(apkPath);
 
         ApkVerifier.Builder apkVerifierBuilder = new ApkVerifier.Builder(inputApk);
@@ -110,6 +116,9 @@ public class ApkSignerTool {
                 keystoreMD5 = HexEncoding.encode(md5.digest(encodedCert));
             }
         } catch (Exception e) {
+        	if(showException){
+        		e.printStackTrace();
+			}
 			msg = e.getMessage();
 		}
 

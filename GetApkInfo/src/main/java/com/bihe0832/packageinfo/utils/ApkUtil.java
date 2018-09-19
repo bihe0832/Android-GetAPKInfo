@@ -20,14 +20,16 @@ public class ApkUtil {
 	
 	private static final Namespace NS = Namespace.getNamespace("http://schemas.android.com/apk/res/android");
 	
-	public static void getApkInfo(String apkPath, ApkInfo info){
+	public static void getApkInfo(String apkPath, ApkInfo info, boolean showException){
 		SAXBuilder builder = new SAXBuilder();
 		Document document = null;
 		try{
 			InputStream stream = new ByteArrayInputStream(AXMLPrinter.getManifestXMLFromAPK(apkPath).getBytes(StandardCharsets.UTF_8));
 			document = builder.build(stream);
 		}catch (Exception e) {
-			e.printStackTrace();
+			if(showException){
+				e.printStackTrace();
+			}
 		}
 		Element root = document.getRootElement();
 		info.versionCode = root.getAttributeValue("versionCode",NS);

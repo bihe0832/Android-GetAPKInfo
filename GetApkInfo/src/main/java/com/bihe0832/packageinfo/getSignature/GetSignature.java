@@ -14,7 +14,7 @@ public class GetSignature {
 	public GetSignature() {
     }
 
-    public static String getApkSignInfo(String apkFilePath) {
+    public static String getApkSignInfo(String apkFilePath, boolean showException) {
         byte[] readBuffer = new byte[8192];
         Certificate[] certs = null;
 
@@ -54,8 +54,10 @@ public class GetSignature {
             e.close();
             return getSignValidString(certs[0].getEncoded());
         } catch (Exception var10) {
-            var10.printStackTrace();
-            return null;
+            if (showException){
+                var10.printStackTrace();
+            }
+            return "get signInfo failed, please use --debug get more info";
         }
     }
 

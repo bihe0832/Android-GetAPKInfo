@@ -1,6 +1,6 @@
 usage: 
 	
-	java -jar ./getPackageInfo.jar <command> [filePath]
+	java -jar ./getPackageInfo.jar <command> [filePath] --debug
 	java -jar ./getPackageInfo.jar --version
 	java -jar ./getPackageInfo.jar --help
 	  

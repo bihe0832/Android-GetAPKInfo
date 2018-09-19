@@ -1,6 +1,6 @@
 usage: 
 	
-	java -jar ./CheckAndroidV2SignatureByAPKSig.jar <command> [filePath]
+	java -jar ./CheckAndroidV2SignatureByAPKSig.jar <command> [filePath] --debug
 	java -jar ./CheckAndroidV2SignatureByAPKSig.jar --version
 	java -jar ./CheckAndroidV2SignatureByAPKSig.jar --help
 	  

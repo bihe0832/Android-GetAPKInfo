@@ -15,11 +15,11 @@ import com.bihe0832.packageinfo.utils.ApkUtil;
 
 public class Main {
 
-	private static final int VERSION_CODE = 5;
-	private static final String VERSION_NAME = "1.1.2";
+	private static final int VERSION_CODE = 6;
+	private static final String VERSION_NAME = "1.1.3";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
-
+	private static boolean sShowDebug = false;
 	private static final int RET_FILE_NOT_GOOD = -2;
 	private static final int RET_GET_INFO_BAD = -3;
 	public static void main(String[] params) throws Exception {
@@ -27,7 +27,12 @@ public class Main {
             printUsage(HELP_PAGE_GENERAL);
             return;
         }
-        if (params[0].toLowerCase().startsWith("--help")) {
+
+		if (params[params.length - 1].toLowerCase().startsWith("--debug")) {
+			sShowDebug = true;
+		}
+
+		if (params[0].toLowerCase().startsWith("--help")) {
             printUsage(HELP_PAGE_GENERAL);
             return;
         } else if (params[0].toLowerCase().startsWith("--version")) {
@@ -47,23 +52,22 @@ public class Main {
 	private static void getApkInfo(String filePath){
 		ApkInfo info = new ApkInfo();
 		try {
-			ApkUtil.getApkInfo(filePath, info);
+			ApkUtil.getApkInfo(filePath, info, sShowDebug);
 		} catch(Exception e){
-			showFailedCheckResult(RET_GET_INFO_BAD,"get channel and apkinfo failed, throw an Exception");
+			showFailedCheckResult(RET_GET_INFO_BAD,"get apkinfo failed, throw an Exception ;please use --debug get more info");
 			return;
 		}
-		String v2Signature = ApkSignerTool.verify(filePath);
-		
+		String v2Signature = ApkSignerTool.verify(filePath, sShowDebug);
 		try{
-			JSONObject jsonobject = new JSONObject(v2Signature);  
+			JSONObject jsonobject = new JSONObject(v2Signature);
 			info.isV1SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V1_OK);
 			info.isV2Signature = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2);
 			info.isV2SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2_OK);
 			info.v2CheckErrorInfo = jsonobject.getString(ApkSignerTool.KEY_RESULT_MSG);
-			info.signature = GetSignature.getApkSignInfo(filePath);
+			info.signature = GetSignature.getApkSignInfo(filePath, sShowDebug);
 			info.v2CheckErrorInfo = jsonobject.getString(ApkSignerTool.KEY_RESULT_MSG);
 		}catch(Exception e){
-			showFailedCheckResult(RET_GET_INFO_BAD,"get apk info failed, throw an Exception:" + e.toString());
+			showFailedCheckResult(RET_GET_INFO_BAD,"get apk info failed, throw an Exception;please use --debug get more info");
 			return;
 		}
 		showSuccssedCheckResult(info);
