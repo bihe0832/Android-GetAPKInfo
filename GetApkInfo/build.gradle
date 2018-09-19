@@ -37,10 +37,10 @@ dependencies {
 //导出未混淆Jar
 task copyJar(dependsOn: "build") {
     copy {
-        from 'build/libs/'+ jar.baseName +'-'+ jar.version +'.jar'
+        from 'build/libs/'+ jar.baseName + '-' + jar.version +'.jar'
         into './../'
         rename { String fileName ->
-            fileName.replace(jar.baseName +'-'+ jar.version +'.jar', jar.baseName  +'.jar')
+            fileName.replace(jar.baseName + '-' + jar.version +'.jar', jar.baseName  +'.jar')
         }
     }
 }

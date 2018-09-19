@@ -1,5 +1,21 @@
 apply plugin: 'java'
 
+jar{
+    //项目名，也是生成的jar的名字
+    baseName = "AXMLPrinter2_zixie"
+    //项目版本号，这部分内容会写进manifest
+    version = "1.0"
+    //添加将引用的jar的源码打入最终的jar
+    from {
+        (configurations.runtime).collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+    //排除引用的jar中的签名信息
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+}
+
+
 //导出未混淆Jar
 task copyJar(dependsOn: "build") {
     copy {
