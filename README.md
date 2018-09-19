@@ -23,9 +23,7 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	│
 	├── CheckAndroidV2Signature ：CheckAndroidV2Signature.jar的源码
 	│
-	├── getPackageInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
-	│
-	├── getMorePackageInfo.jar ：getPackageInfo.jar的升级版，增加了权限、SDK版本的获取
+	├── GetApkInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
 	│
 	├── GetApkInfo ： getPackageInfo.jar的源码
 	│
