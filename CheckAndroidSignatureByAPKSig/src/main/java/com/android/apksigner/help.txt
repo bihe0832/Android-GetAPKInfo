@@ -1,0 +1,30 @@
+usage: 
+	
+	java -jar ./CheckAndroidSignature.jar <command> [filePath] --debug
+	java -jar ./CheckAndroidSignature.jar --version
+	java -jar ./CheckAndroidSignature.jar --help
+	  
+such as:
+
+	 
+	java -jar ./CheckAndroidSignature.jar ./test.apk
+	java -jar ./CheckAndroidSignature.jar --version
+	java -jar ./CheckAndroidSignature.jar --help
+	
+after check,the result will be a string json such as:
+
+	 {"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
+
+	 ret: result code for check
+
+		  0 : check File signature success
+		 -1 : file not found
+		 -2 : file not an Android APK file
+		 -3 : check File signature error ,retry again
+
+	 msg: result msg for check
+	 isV1OK: whether the file's signature is ok or not
+	 isV2: whether the file is use Android-V2 signature or not
+	 isV2OK: whether the file's Android-V2 signature is ok or not
+	 isV3: whether the file is use Android-V3 signature or not
+     isV3OK: whether the file's Android-V3 signature is ok or not

@@ -59,19 +59,19 @@ set params=
 
 :firstArg
 if [%1]==[] goto endArgs
-set a=%~1
+set "a=%~1"
 
     if [%defaultXmx%]==[] goto notXmx
-    if %a:~0,5% NEQ -JXmx goto notXmx
+    if "%a:~0,5%" NEQ "-JXmx" goto notXmx
         set defaultXmx=
     :notXmx
 
     if [%defaultXss%]==[] goto notXss
-    if %a:~0,5% NEQ -JXss goto notXss
+    if "%a:~0,5%" NEQ "-JXss" goto notXss
         set defaultXss=
     :notXss
 
-    if %a:~0,2% NEQ -J goto notJ
+    if "%a:~0,2%" NEQ "-J" goto notJ
         set javaOpts=%javaOpts% -%a:~2%
         shift /1
         goto firstArg
@@ -84,5 +84,5 @@ set a=%~1
 :endArgs
 
 set javaOpts=%javaOpts% %defaultXmx% %defaultXss%
-call "%java_exe%" %javaOpts% -Djava.ext.dirs="%frameworkdir%" -jar "%jarpath%" %params%
+call "%java_exe%" %javaOpts% -jar "%jarpath%" %params%
 

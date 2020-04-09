@@ -35,8 +35,11 @@ import java.util.Arrays;
 class OptionsParser {
     private final String[] mParams;
     private int mIndex;
+    private int mPutBackIndex;
     private String mLastOptionValue;
+    private String mPutBackLastOptionValue;
     private String mLastOptionOriginalForm;
+    private String mPutBackLastOptionOriginalForm;
 
     /**
      * Constructs a new {@code OptionsParser} initialized with the provided command-line.
@@ -63,8 +66,11 @@ class OptionsParser {
             return null;
         }
 
+        mPutBackIndex = mIndex;
         mIndex++;
+        mPutBackLastOptionOriginalForm = mLastOptionOriginalForm;
         mLastOptionOriginalForm = param;
+        mPutBackLastOptionValue = mLastOptionValue;
         mLastOptionValue = null;
         if (param.startsWith("--")) {
             // FORMAT: --name value OR --name=value
@@ -86,6 +92,15 @@ class OptionsParser {
         }
     }
 
+    /**
+     * Undoes the last call to nextOption(), if one was made.  This allows callers to unwind state
+     * so as not to eat up an option that is meant to be processed elsewhere.
+     */
+    public void putOption() {
+        mIndex = mPutBackIndex;
+        mLastOptionOriginalForm = mPutBackLastOptionOriginalForm;
+        mLastOptionValue = mPutBackLastOptionValue;
+    }
     /**
      * Returns the original form of the current option. The original form includes the leading dash
      * or dashes. This is intended to be used for referencing the option in error messages.

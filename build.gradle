@@ -2,7 +2,7 @@
 
 buildscript {
     repositories {
-        maven { url "http://maven.oa.com/nexus/content/repositories/android" }
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.0'
@@ -11,7 +11,7 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url "http://maven.oa.com/nexus/content/repositories/android" }
+        jcenter()
     }
 }
 

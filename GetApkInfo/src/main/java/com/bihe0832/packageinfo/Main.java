@@ -16,7 +16,7 @@ import com.bihe0832.packageinfo.utils.ApkUtil;
 public class Main {
 
 	private static final int VERSION_CODE = 6;
-	private static final String VERSION_NAME = "1.1.3";
+	private static final String VERSION_NAME = "2.0";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
 	private static boolean sShowDebug = false;
@@ -36,7 +36,7 @@ public class Main {
             printUsage(HELP_PAGE_GENERAL);
             return;
         } else if (params[0].toLowerCase().startsWith("--version")) {
-    		System.out.println(Main.class.toString() + " version " + VERSION_NAME + " (CheckAndroidV2Signature - " + VERSION_CODE + ")\n");
+    		System.out.println(Main.class.toString() + " version " + VERSION_NAME + " (GetApkInfo - " + VERSION_CODE + ")\n");
     		printUsage(VERSION_PAGE_GENERAL);
             return;
         } else if(params[0].toLowerCase().endsWith(".apk")){
@@ -63,9 +63,10 @@ public class Main {
 			info.isV1SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V1_OK);
 			info.isV2Signature = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2);
 			info.isV2SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V2_OK);
-			info.v2CheckErrorInfo = jsonobject.getString(ApkSignerTool.KEY_RESULT_MSG);
+			info.isV3Signature = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V3);
+			info.isV3SignatureOK = jsonobject.getBoolean(ApkSignerTool.KEY_RESULT_IS_V3_OK);
+			info.getSignatureErrorInfo = v2Signature;
 			info.signature = GetSignature.getApkSignInfo(filePath, sShowDebug);
-			info.v2CheckErrorInfo = jsonobject.getString(ApkSignerTool.KEY_RESULT_MSG);
 		}catch(Exception e){
 			showFailedCheckResult(RET_GET_INFO_BAD,"get apk info failed, throw an Exception;please use --debug get more info");
 			return;
@@ -95,17 +96,6 @@ public class Main {
             }
         } catch (IOException e) {
             throw new RuntimeException("Failed to read " + page + " resource");
-        }
-    }
-
-    /**
-     * Indicates that there is an issue with command-line parameters provided to this tool.
-     */
-    private static class ParameterException extends Exception {
-        private static final long serialVersionUID = 1L;
-
-        ParameterException(String message) {
-            super(message);
         }
     }
 }

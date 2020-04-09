@@ -2,7 +2,7 @@ apply plugin: 'java'
 
 jar{
     //项目名，也是生成的jar的名字
-    baseName = "GetApkInfo"
+    baseName = "GetAPKInfo"
     //项目版本号，这部分内容会写进manifest
     version = "1.0"
     //项目的manifest定义，其中就包含最关键的入口类定义
@@ -30,7 +30,7 @@ sourceSets.main.resources {
 //代码依赖
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':CheckAndroidV2SignatureByAPKSig')
+    compile project(':CheckAndroidSignatureByAPKSig')
     compile project(':AXMLPrinter2_zixie')
 }
 

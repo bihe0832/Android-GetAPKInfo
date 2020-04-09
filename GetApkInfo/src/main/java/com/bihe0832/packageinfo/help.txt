@@ -1,15 +1,15 @@
 usage: 
 	
-	java -jar ./getPackageInfo.jar <command> [filePath] --debug
-	java -jar ./getPackageInfo.jar --version
-	java -jar ./getPackageInfo.jar --help
+	java -jar ./GetAPKInfo.jar <command> [filePath] --debug
+	java -jar ./GetAPKInfo.jar --version
+	java -jar ./GetAPKInfo.jar --help
 	  
 such as:
 
 	 
-	java -jar ./getPackageInfo.jar ./test.apk
-	java -jar ./getPackageInfo.jar --version
-	java -jar ./getPackageInfo.jar --help
+	java -jar ./GetAPKInfo.jar ./test.apk
+	java -jar ./GetAPKInfo.jar --version
+	java -jar ./GetAPKInfo.jar --help
 	
 after check,the result will be as flow:
 
@@ -22,8 +22,11 @@ after check,the result will be as flow:
 	  V1签名验证通过: true
 	  使用V2签名: true
 	  V2签名验证通过: true
+	  使用V3签名: true
+	  V3签名验证通过: true
+	  签名验证详细信息: {"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
 	  
-if use getMorePackageInfo.jar，the result will be as flow:
+if use GetMoreAPKInfo.jar，the result will be as flow:
 	
 	执行结果: 成功
 	应用信息: 
@@ -37,6 +40,9 @@ if use getMorePackageInfo.jar，the result will be as flow:
 	  V1签名验证通过: true
 	  使用V2签名: true
 	  V2签名验证通过: true
+	  使用V3签名: true
+      V3签名验证通过: true
+      签名验证详细信息: {"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
 	  使用权限列表:
 	      android.permission.INTERNET
 	      android.permission.VIBRATE
