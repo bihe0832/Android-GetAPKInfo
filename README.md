@@ -16,18 +16,16 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	├── AXMLPrinter2_zixie.jar ：对于官方工具AXMLPrinter2的优化，解决因为不同api下apk的AndroidMainfest编码引起的问题
 	│
 	├── AXMLPrinter2_zixie ：AXMLPrinter2_zixie.jar的源码
+	│	│
+	├── CheckAndroidSignature.jar ：基于官方签名相关的工具apksigner的源码改造的安卓签名校验工具
 	│
-	├── CheckAndroidV2SignatureByAPKSig ：CheckAndroidV2SignatureByAPKSig.jar的源码
+	├── CheckAndroidSignatureByAPKSig ：CheckAndroidSignature.jar的源码
 	│
-	├── CheckAndroidV2SignatureByAPKSig.jar ：基于官方签名相关的工具apksigner的源码改造的安卓签名校验工具
+	├── GetAPKInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
 	│
-	├── CheckAndroidV2Signature ：CheckAndroidV2Signature.jar的源码
+	├── GetApkInfo ： GetAPKInfo.jar的源码
 	│
-	├── GetApkInfo.jar ：一款基于Java环境的读取apk的包名、版本号、签名、是否使用V2签名，V2签名校验是否通过的工具
-	│
-	├── GetApkInfo ： getPackageInfo.jar的源码
-	│
-	├── apksig ： Android SDK Build Tools中关于签名相关的工具apksigner的源码（提供了V2签名以及校验的方法）
+	├── apksig ： Android SDK Build Tools中关于签名相关的工具apksigner的源码（提供了V2、V3签名以及校验的方法）
 	│
 	└── README.md
 	
@@ -45,17 +43,12 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 
 非可执行jar，主要是对官方工具AXMLPrinter2针对不同api下AndroidMainfest编码不同导致解析异常的优化，解决[https://github.com/bihe0832/Android-GetAPKInfo/issues/1](https://github.com/bihe0832/Android-GetAPKInfo/issues/1) 和 [https://github.com/bihe0832/Android-GetAPKInfo/issues/5](https://github.com/bihe0832/Android-GetAPKInfo/issues/5)遇到的问题
 
-### CheckAndroidV2Signature.jar
+### CheckAndroidSignature.jar
 
-	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
-	{"ret":0,"msg":"ok","isV2":false,"isV2OK":false}
-
-### CheckAndroidV2Signature.jar
-
-	➜  java -jar ./CheckAndroidV2Signature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
-	{"ret":0,"msg":"","isV1OK":true,"isV2":false,"isV2OK":false,"keystoreMd5":"252e3ded833125ed3e3bb010bc24f4dc"}
+	➜  java -jar ./CheckAndroidSignature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
+	{"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
 	
-### getPackageInfo.jar
+### GetAPKInfo.jar
 
 	➜  java -jar ./getPackageInfo.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
 	
@@ -68,11 +61,13 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	  V1签名验证通过: false
 	  使用V2签名: false
 	  V2签名验证通过: false
-	  签名验证失败原因: ERROR: JAR signer CERT.RSA: JAR signature META-INF/CERT.SF indicates the APK is signed using APK Signature Scheme v2 but no such signature was found. Signature stripped?
+	  使用V3签名: false
+	  V3签名验证通过: false
+	  签名验证详细信息: {"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
+	  
+### GetMoreAPKInfo.jar
 
-### getMorePackageInfo.jar
-
-➜  java -jar ./getMorePackageInfo.jar ./test.apk
+➜  java -jar ./GetMorePackageInfo.jar ./test.apk
 	  
 	执行结果: 成功
 	应用信息:
@@ -86,6 +81,9 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	  V1签名验证通过: true
 	  使用V2签名: true
 	  V2签名验证通过: true
+	  使用V3签名: false
+	  V3签名验证通过: false
+	  签名验证详细信息: {"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
 	  使用权限列表:
 	      android.permission.INTERNET
 	      android.permission.VIBRATE

@@ -36,7 +36,7 @@ public class Main {
             printUsage(HELP_PAGE_GENERAL);
             return;
         } else if (params[0].toLowerCase().startsWith("--version")) {
-    		System.out.println(Main.class.toString() + " version " + VERSION_NAME + " (GetApkInfo - " + VERSION_CODE + ")\n");
+    		System.out.println(Main.class.getName() + " version " + VERSION_NAME + " (GetApkInfo - " + VERSION_CODE + ")\n");
     		printUsage(VERSION_PAGE_GENERAL);
             return;
         } else if(params[0].toLowerCase().endsWith(".apk")){

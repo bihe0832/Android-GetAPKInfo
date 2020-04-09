@@ -4,21 +4,6 @@
 
 具体的实现原理包括怎么生成可执行jar，怎么混淆jar等，我会在另一篇文章中说明。
 
-## 目录介绍
-	
- 
-	├── getPackageInfo-inner.jar : 混淆前的可执行jar
-	│ 
-	├── libs  : 第三方包依赖
-	│   │
-	│   ├── AXMLPrinter2.jar : 解析AndroidMainfest
-	│   │ 
-	│   └── jdom.jar : 解析Xml
-	│ 
-	├── proguard.pro : 代码混淆规则
-	│ 
-	└── src : 源码
-
 
 根据 [https://github.com/bihe0832/Android-GetAPKInfo/issues/2](https://github.com/bihe0832/Android-GetAPKInfo/issues/2) 的需求，增加了获取更多信息的jar：getMorePackageInfo.jar；可以直接在根目录下载。由于个人实际开发中并不需要其余信息，因此在代码中**新增字段在打印时被注释了**。如果有相关的需求，可以删除com.bihe0832.packageinfo.bean.ApkInfo的toString中相关的注释。如果有更多字段的添加需求，可以参照com.bihe0832.packageinfo.utils.ApkUtil中的代码实现添加。
 
@@ -26,29 +11,31 @@
 
 ### 查看帮助
 
-	➜  java -jar ./getPackageInfo.jar
+	➜  java -jar ./GetAPKInfo.jar
 	
-	 usage: java -jar ./getPackageInfo.jar [--version] [--help] [filePath]
+	 usage: java -jar ./GetAPKInfo.jar [--version] [--help] [filePath]
 	
 	such as:
 	
-		 java -jar ./getPackageInfo.jar --version
-		 java -jar ./getPackageInfo.jar --help
-		 java -jar ./getPackageInfo.jar ./test.apk
+		 java -jar ./GetAPKInfo.jar --version
+		 java -jar ./GetAPKInfo.jar --help
+		 java -jar ./GetAPKInfo.jar ./test.apk
 
 ### 查看版本
 
 
-	➜  java -jar ./getPackageInfo.jar --version
-	com.bihe0832.getPackageInfo version 1.0.0 (getPackageInfo - 1)
+	➜  java -jar ./GetAPKInfo.jar --version
+	
+	com.bihe0832.packageinfo.Main version 2.0 (GetApkInfo - 6)
+	
 	homepage : https://github.com/bihe0832/AndroidGetAPKInfo
 	blog : http://blog.bihe0832.com
 	github : https://github.com/bihe0832
-	
+		
 	
 ### 查看应用信息
 
-	➜  java -jar ./getPackageInfo.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
+	➜  java -jar ./GetAPKInfo.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
 	
 	执行结果: 成功
 	应用信息:
@@ -61,7 +48,7 @@
 	  V2签名验证通过: false	
 	  
 	  
-	  ➜  java -jar ./getMorePackageInfo.jar ./test.apk
+	  ➜  java -jar ./GetMorePackageInfo.jar ./test.apk
 	  
 	执行结果: 成功
 	应用信息:

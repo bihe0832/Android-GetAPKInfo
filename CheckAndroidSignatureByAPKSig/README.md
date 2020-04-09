@@ -6,23 +6,23 @@
 
 #### 查看帮助
 
-	➜  java -jar ./CheckAndroidV2SignatureByAPKSig.jar
+	➜  java -jar ./CheckAndroidSignature.jar
 	usage:
 	
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar <command> [filePath]
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar --version
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar --help
+		java -jar ./CheckAndroidSignature.jar <command> [filePath]
+		java -jar ./CheckAndroidSignature.jar --version
+		java -jar ./CheckAndroidSignature.jar --help
 	
 	such as:
 	
 	
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar ./test.apk
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar --version
-		java -jar ./CheckAndroidV2SignatureByAPKSig.jar --help
+		java -jar ./CheckAndroidSignature.jar ./test.apk
+		java -jar ./CheckAndroidSignature.jar --version
+		java -jar ./CheckAndroidSignature.jar --help
 	
 	after check,the result will be a string json such as:
 	
-		 {"ret":0,"msg":"ok","isV1OK":true,,"isV2":true"isV2OK":true}
+	{"ret":0,"msg":"","isV1OK":true,"isV2":false,"isV2OK":false,"keystoreMd5":"252e3ded833125ed3e3bb010bc24f4dc"}
 	
 		 ret: result code for check
 	
@@ -39,16 +39,16 @@
 			
 #### 查看版本
 
-	➜  java -jar ./CheckAndroidV2SignatureByAPKSig.jar --version
-com.tencent.ysdk.CheckAndroidV2Signature version 1.1.0 (CheckAndroidV2Signature - 4)
+	➜  java -jar ./CheckAndroidSignature.jar --version
 
-homepage : https://github.com/bihe0832/AndroidGetAPKInfo
-blog : http://blog.bihe0832.com
-github : https://github.com/bihe0832
+	com.bihe0832.CheckAndroidSignature version 2.0 (CheckAndroidSignature - 6)
+	
+	homepage : https://github.com/bihe0832/AndroidGetAPKInfo
+	blog : http://blog.bihe0832.com
+	github : https://github.com/bihe0832
 		
 #### 查看应用信息
 
-	➜  java -jar ./CheckAndroidV2SignatureByAPKSig.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
-	{"ret":0,"msg":"","isV1OK":true,"isV2":false,"isV2OK":false,"keystoreMd5":"252e3ded833125ed3e3bb010bc24f4dc"}
-
+	➜  java -jar ./CheckAndroidSignature.jar ./YSDK_Android_1.3.1_629-debug-ysdktest-inner.apk
+	{"ret":0,"msg":"","isV1OK":false,"isV2":true,"isV2OK":true,"isV3":true,"isV3OK":true,"keystoreMd5":"80fa5a8552e418f6bd805c65bcddf4c8"}
 
