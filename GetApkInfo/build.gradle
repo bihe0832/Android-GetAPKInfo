@@ -36,6 +36,7 @@ dependencies {
 
 //导出未混淆Jar
 task copyJar(dependsOn: "build") {
+    group = "zixieDev"
     copy {
         from 'build/libs/'+ jar.baseName + '-' + jar.version +'.jar'
         into './../'
@@ -48,6 +49,7 @@ task copyJar(dependsOn: "build") {
 
 //导出混淆后的Jar
 task proguardJar(type: proguard.gradle.ProGuardTask,dependsOn: "build") {
+    group = "zixieDev"
     // 未混淆的jar路径
     injars 'build/libs/' + jar.baseName + '-' + jar.version + '.jar'
     // 混淆后的jar输出路径
