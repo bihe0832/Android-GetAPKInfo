@@ -15,8 +15,8 @@ import com.bihe0832.packageinfo.utils.ApkUtil;
 
 public class Main {
 
-	private static final int VERSION_CODE = 6;
-	private static final String VERSION_NAME = "2.0";
+	private static final int VERSION_CODE = 7;
+	private static final String VERSION_NAME = "2.0.1";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
 	private static boolean sShowDebug = true;
