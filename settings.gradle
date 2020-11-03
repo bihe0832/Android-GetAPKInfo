@@ -1,1 +1,4 @@
-include ':AndroidGetSignature', ':CheckAndroidSignatureByAPKSig', ':GetApkInfo', ':AXMLPrinter2_zixie'
+//include ':AndroidGetSignature'
+include ':CheckAndroidSignatureByAPKSig'
+include ':GetApkInfo'
+include ':AXMLPrinter2_zixie'

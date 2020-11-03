@@ -19,13 +19,13 @@ public class Main {
 	private static final String VERSION_NAME = "2.0";
 	private static final String HELP_PAGE_GENERAL = "help.txt";
 	private static final String VERSION_PAGE_GENERAL = "help_version.txt";
-	private static boolean sShowDebug = false;
+	private static boolean sShowDebug = true;
 	private static final int RET_FILE_NOT_GOOD = -2;
 	private static final int RET_GET_INFO_BAD = -3;
 	public static void main(String[] params) throws Exception {
         if ((params.length == 0)) {
             printUsage(HELP_PAGE_GENERAL);
-            return;
+			return;
         }
 
 		if (params[params.length - 1].toLowerCase().startsWith("--debug")) {
