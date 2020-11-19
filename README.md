@@ -9,9 +9,6 @@
 Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse)
 ## 目录结构
 
-	├── AndroidGetSignature.apk : 一款基于Android Studio开发的通过包名获取apk签名的应用
-	│
-	├── AndroidGetSignature : AndroidGetSignature.apk对应源码
 	│
 	├── AXMLPrinter2_zixie.jar ：对于官方工具AXMLPrinter2的优化，解决因为不同api下apk的AndroidMainfest编码引起的问题
 	│
@@ -32,12 +29,6 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 **备注：除了根目录，每个子项目下面都有对应功能介绍相关的ReadMe文件，如果想了解具体项目的详细信息，可以进入子项目查看**
 	
 ## 使用方法
-
-这里仅列出主要操作的使用方法，详细内容请查看对应目录的README文件。
-
-### AndroidGetSignature.apk 
-
-安装AndroidGetSignature.apk 后输入包名，点击获取
 
 ### AXMLPrinter2_zixie.jar 
 
@@ -92,7 +83,24 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 	      android.permission.ACCESS_NETWORK_STATE
 	      android.permission.ACCESS_WIFI_STATE
 	      android.permission.READ_PHONE_STATE
-	      
+
+### GetAPKInfo
+
+
+近期对 GetAPKInfo 做了调整，后续将在`AndroidAppFactory-Sample` 中维护，这里仅提供下载链接。对于源码Github为：
+
+https://github.com/bihe0832/AndroidAppFactory-Sample
+
+- 下载地址：
+		
+	https://github.com/bihe0832/AndroidAppFactory-Sample/releases/download/V1.0.0.1/ZAPK_V1.0.0_1_release.apk
+
+	<img alt="" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fmicrodemo.bihe0832.com%2FMyJS%2Frouter%2Fjump.html%3Fvalue%3Dhttps%253A%252F%252Fgithub.com%252Fbihe0832%252FAndroidAppFactory-Sample%252Freleases%252Fdownload%252FV1.0.0.1%252FZAPK_V1.0.0_1_release.apk" >
+
+	- UI 截图
+
+		<img alt="" src="https://github.com/bihe0832/AndroidAppFactory-Sample/blob/main/demo/getapkinfo.png" width="60%">
+      
 ## 相关文章
 
 - [一款基于Java环境的读取应用包名、签名、是否V2签名等基本信息的工具](http://blog.bihe0832.com/java-getpackageinfo.html)
