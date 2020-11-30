@@ -93,9 +93,9 @@ https://github.com/bihe0832/AndroidAppFactory-Sample
 
 - 下载地址：
 		
-	https://github.com/bihe0832/AndroidAppFactory-Sample/releases/download/V1.0.0.1/ZAPK_V1.0.0_1_release.apk
+	https://cdn.bihe0832.com/app/release/ZAPK_V1.1.1_16_1130_official.apk
 
-	<img alt="" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fmicrodemo.bihe0832.com%2FMyJS%2Frouter%2Fjump.html%3Fvalue%3Dhttps%253A%252F%252Fgithub.com%252Fbihe0832%252FAndroidAppFactory-Sample%252Freleases%252Fdownload%252FV1.0.0.1%252FZAPK_V1.0.0_1_release.apk" >
+	<img alt="" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://cdn.bihe0832.com/app/release/ZAPK_V1.1.1_16_1130_official.apk" >
 
 	- UI 截图
 
