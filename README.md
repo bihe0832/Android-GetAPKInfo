@@ -91,15 +91,11 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 
 https://github.com/bihe0832/AndroidAppFactory-Sample
 
-- 下载地址：
-		
-	https://cdn.bihe0832.com/app/release/ZAPK_V1.1.1_16_1130_official.apk
+- 下载地址：https://cdn.bihe0832.com/app/download.html
 
-	<img alt="" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://cdn.bihe0832.com/app/release/ZAPK_V1.1.1_16_1130_official.apk" >
+- UI 截图
 
-	- UI 截图
-
-		<img alt="" src="https://github.com/bihe0832/AndroidAppFactory-Sample/blob/main/demo/getapkinfo.png" width="60%">
+	<img alt="" src="https://github.com/bihe0832/AndroidAppFactory-Sample/blob/main/demo/getapkinfo.png" width="60%">
       
 ## 相关文章
 
