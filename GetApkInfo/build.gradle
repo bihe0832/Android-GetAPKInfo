@@ -4,7 +4,7 @@ jar{
     //项目名，也是生成的jar的名字
     baseName = "GetAPKInfo"
     //项目版本号，这部分内容会写进manifest
-    version = "1.0"
+    version = "2.0.2"
     //项目的manifest定义，其中就包含最关键的入口类定义
     manifest {
         attributes 'Main-Class': 'com.bihe0832.packageinfo.Main'
