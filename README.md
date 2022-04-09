@@ -91,7 +91,7 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 
 https://github.com/bihe0832/AndroidAppFactory-Sample
 
-- 下载地址：https://cdn.bihe0832.com/app/download.html
+- 下载地址：https://android.bihe0832.com/doc/summary/samples.html
 
 - UI 截图
 
