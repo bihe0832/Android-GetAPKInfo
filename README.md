@@ -87,7 +87,7 @@ Eclipse：[https://github.com/bihe0832/Android-GetAPKInfo/tree/eclipse](https://
 ### GetAPKInfo
 
 
-** 近期对 GetAPKInfo 做了调整，后续将在`AndroidAppFactory-Sample` 中维护，这里仅提供下载链接**。对于源码Github为：
+**近期对 GetAPKInfo 做了调整，后续将在`AndroidAppFactory-Sample` 中维护，这里仅提供下载链接**。对于源码Github为：
 
 https://github.com/bihe0832/AndroidAppFactory-Sample
 
