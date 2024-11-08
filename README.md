@@ -95,9 +95,9 @@ https://github.com/bihe0832/AndroidAppFactory-Sample
 
 - UI 截图
 
-	<img src="https://android.bihe0832.com/doc/summary/getapkinfo.png" width="60%" />
+	<img src="https://android.bihe0832.com/doc/demo/getapkinfo.png" width="60%" />
 
- 	<img src="https://android.bihe0832.com/doc/summary/getapkinfo_dialog.png" width="60%" />
+ 	<img src="https://android.bihe0832.com/doc/demo/getapkinfo_dialog.png" width="60%" />
       
 ## 相关文章
 
